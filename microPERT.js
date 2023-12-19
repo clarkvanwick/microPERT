@@ -81,7 +81,8 @@ function performCalculations() {
     var pessimistic = parseFloat(document.getElementById("pessimistic").value);
 
     var expectedValue = calculateExpectedValue(optimistic, nominal, pessimistic);
-    var standardDeviation = calculateStandardDeviation(new Array(pessimistic, nominal, optimistic));
+    const estimates = new Array(pessimistic, nominal, optimistic);
+    var standardDeviation = calculateStandardDeviation(estimates);
 
     if (document.getElementById("roundUp").checked) {
         expectedValue = Math.ceil(expectedValue);
