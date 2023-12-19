@@ -81,7 +81,7 @@ function performCalculations() {
     var pessimistic = parseFloat(document.getElementById("pessimistic").value);
 
     var expectedValue = calculateExpectedValue(optimistic, nominal, pessimistic);
-    var standardDeviation = calculateStandardDeviation(pessimistic, nominal, optimistic);
+    var standardDeviation = calculateStandardDeviation(pessimistic, optimistic);
 
     if (document.getElementById("roundUp").checked) {
         expectedValue = Math.ceil(expectedValue);
@@ -100,14 +100,8 @@ function calculateExpectedValue(opt, nom, pes) {
     }
 }
 
-function calculateStandardDeviation(pes, nom, opt) {
-    const sample = new Array(pes, nom, opt);
-    const n = sample.length;
-    const mean = sample.reduce((acc, val) => acc + val, 0) / n;
-    const squaredDifferences = sample.map(val => Math.pow(val - mean, 2));
-    const variance = squaredDifferences.reduce((acc, val) => acc + val, 0) / (n - 1);
-    const sd = Math.sqrt(variance);
-    return sd;
+function calculateStandardDeviation(pes, opt) {
+    return (pes - opt) / 6;
 }
 
 // Set/Reset Messages/Fields
