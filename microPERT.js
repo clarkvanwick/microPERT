@@ -106,7 +106,7 @@ function calculateStandardDeviation(pes, nom, opt) {
     const mean = sample.reduce((acc, val) => acc + val, 0) / n;
     const squaredDifferences = sample.map(val => Math.pow(val - mean, 2));
     const variance = squaredDifferences.reduce((acc, val) => acc + val, 0) / (n - 1);
-    const sd = Math.sqrt(varience);
+    const sd = Math.sqrt(variance);
     return sd;
 }
 
