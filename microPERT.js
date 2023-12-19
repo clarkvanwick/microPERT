@@ -81,8 +81,7 @@ function performCalculations() {
     var pessimistic = parseFloat(document.getElementById("pessimistic").value);
 
     var expectedValue = calculateExpectedValue(optimistic, nominal, pessimistic);
-    const estimates = new Array(pessimistic, nominal, optimistic);
-    var standardDeviation = calculateStandardDeviation(estimates);
+    var standardDeviation = calculateStandardDeviation(pessimistic, nominal, optimistic);
 
     if (document.getElementById("roundUp").checked) {
         expectedValue = Math.ceil(expectedValue);
@@ -101,7 +100,8 @@ function calculateExpectedValue(opt, nom, pes) {
     }
 }
 
-function calculateStandardDeviation(sample) {
+function calculateStandardDeviation(pes, nom, opt) {
+    const sample = new Array(pes, nom, opt);
     const n = sample.length;
     const mean = sample.reduce((acc, val) => acc + val, 0) / n;
     const squaredDifferences = sample.map(val => Math.pow(val - mean, 2));
